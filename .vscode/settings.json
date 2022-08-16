@@ -1,0 +1,8 @@
+{
+    "editor.wordWrap": "on",
+    "eslint.alwaysShowStatus": false,
+    "eslint.codeActionsOnSave.rules": null,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}
