@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,6 +16,13 @@ export class UsersService {
         const users = new User();
         users.screenName = screenName;
         users.password = password; 
+        try {
+            await this.userRepository.save(users);
+        } catch (error) {
+            throw new InternalServerErrorException();
+        }
+
+        return users;
     }
 
     async findAll(): Promise<User[]>{
