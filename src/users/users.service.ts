@@ -11,7 +11,7 @@ export class UsersService {
         private userRepository: Repository<User>,
     ){}
 
-    async create(user: CreateUserDto): Promise<User|void>{
+    async create(user: CreateUserDto): Promise<User|undefined>{
         const { screenName, password } = user;
         const users = new User();
         users.screenName = screenName;
