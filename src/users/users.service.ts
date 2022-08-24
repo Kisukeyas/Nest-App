@@ -28,4 +28,8 @@ export class UsersService {
     async findAll(): Promise<User[]>{
         return this.userRepository.find();
     }
+
+    findOne(userName: User['screenName']): Promise<User | undefined>{
+        return this.userRepository.findOne()
+    }
 }
