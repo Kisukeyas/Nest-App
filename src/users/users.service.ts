@@ -30,6 +30,6 @@ export class UsersService {
     }
 
     findOne(userName: User['screenName']): Promise<User | undefined>{
-        return this.userRepository.findOne()
+        return this.userRepository.findOne({ where: { screenName }});
     }
 }
