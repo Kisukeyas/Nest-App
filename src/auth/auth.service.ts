@@ -30,8 +30,9 @@ export class AuthService {
 
     async login(user: PasswordOmitUser) {
         // jwtにつけるPayload情報
-        const payload: JwtPayload = { userId: user.id, username: user.screenName };
+        const payload: JwtPayload = { username: user.screenName };
     
         return {
-          access_token: this.jwtService.sign(payload),
+          access_token: this.jwtService.sign(payload)
 }
+    }}
