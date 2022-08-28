@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, ValidationPipe} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, ValidationPipe} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
@@ -10,6 +10,11 @@ export class UsersController {
     @Get()
     findAll(): Promise<User[]> {
         return this.usersService.findAll();
+    }
+
+    @Get(':username')
+    findOne(@Param('screenName') username :string) {
+        return this.usersService.findOne(username);
     }
 
     @Post()
