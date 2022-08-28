@@ -30,7 +30,7 @@ export class UsersService {
     }
 
     async findOne(userName: User['screenName']){
-        const user = await this.userRepository.findOne({ where: {screenName : userName}})
+        const user = await this.userRepository.find({where: {screenName : userName}});
         return user
     }
 }
