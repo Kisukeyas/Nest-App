@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class UsersService {
         private userRepository: Repository<User>,
     ){}
 
-    async create(user: CreateUserDto): Promise<User|undefined>{
+    async create(user: User): Promise<User|undefined>{
         const { screenName, password } = user;
         const users = new User();
         users.screenName = screenName;
@@ -26,7 +25,7 @@ export class UsersService {
     }
 
     async findAll(): Promise<User[]>{
-        return this.userRepository.find();
+        return await this.userRepository.find();
     }
 
     async findOne(userName: User['screenName']){
