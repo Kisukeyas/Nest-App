@@ -8,7 +8,7 @@ export class User {
 
   @IsString()
   @MinLength(1)
-  @MaxLength(4)
+  @MaxLength(8)
   @Column({ length: 16 })
   screenName: string;
 

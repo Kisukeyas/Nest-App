@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException } from '@ne
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -14,7 +15,7 @@ export class UsersService {
         const { screenName, password } = user;
         const users = new User();
         users.screenName = screenName;
-        users.password = password; 
+        users.password = await bcrypt.hash(password, 12) ; 
         try {
             await this.userRepository.save(users);
         } catch (error) {
@@ -34,5 +35,9 @@ export class UsersService {
             throw new NotFoundException('ユーザーが見つかりません')
         }
         return user
+    }
+
+    async delete(id: User['id']){
+        return await this.userRepository.delete(id);
     }
 }
