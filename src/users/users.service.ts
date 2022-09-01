@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -30,6 +30,9 @@ export class UsersService {
 
     async findOne(userName: User['screenName']){
         const user = await this.userRepository.find({where: {screenName : userName}});
+        if (!user) {
+            throw new NotFoundException('ユーザーが見つかりません')
+        }
         return user
     }
 }
