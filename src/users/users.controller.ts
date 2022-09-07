@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Request, UseGuards, ValidationPipe} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
@@ -14,7 +14,7 @@ export class UsersController {
 
     @Get(':screenName')
     @UseGuards(AuthGuard('jwt'))
-    findOne(@Param('screenName') username :string){
+    findOne(@Param('screenName') username: string){
         return this.usersService.findOne(username);
     }
 
