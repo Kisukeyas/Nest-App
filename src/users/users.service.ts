@@ -21,7 +21,6 @@ export class UsersService {
         } catch (error) {
             throw new InternalServerErrorException();
         }
-
         return users;
     }
 
