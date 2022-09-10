@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException } from '@ne
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import * as bcrypt from 'bcryptjs';
+const bcrypt = require('bcrypt');
 
 @Injectable()
 export class UsersService {
@@ -15,7 +15,7 @@ export class UsersService {
         const { screenName, password } = user;
         const users = new User();
         users.screenName = screenName;
-        users.password = await bcrypt.hash(password, 12) ; 
+        users.password = await bcrypt.hash(password, 12); 
         try {
             await this.userRepository.save(users);
         } catch (error) {
