@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException } from '@ne
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-const bcrypt = require('bcrypt');
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UsersService {
