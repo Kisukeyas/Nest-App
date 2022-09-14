@@ -11,10 +11,10 @@ export class AuthService {
     constructor(private readonly jwtService: JwtService, private readonly userService: UsersService){}
     async validateUser( { screenName, password }: User){
         const user = await this.userService.findOne(screenName);
-        // const isValid = await bcrypt.compare( password, user['password']);
-        // if (!isValid) {
-        //     throw new UnauthorizedException('Invalid credentials');
-        // }
+        const isValid = await bcrypt.compare( password, user['password']);
+        if (!isValid) {
+            throw new UnauthorizedException('Invalid credentials');
+        }
         return user;
     }
     async login(user: User){
